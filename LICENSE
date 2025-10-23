@@ -1,0 +1,124 @@
+MIT License
+
+Copyright (c) 2025 Ke Technologies
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
+
+  This project incorporates components from the projects listed below. The original
+  copyright notices and the licenses under which they were received are set
+  forth below.
+
+  ================================================================================
+
+  1. Hutool
+     Copyright (c) 2017-2023, looly(loolly@aliyun.com) and Contributors
+     Licensed under Mulan PSL v2
+     https://github.com/dromara/hutool
+
+  2. Javassist (via org.reflections:reflections)
+     Copyright (C) 1999-2023 by Shigeru Chiba. All Rights Reserved.
+     Licensed under triple license (MPL-1.1 OR LGPL-2.1+ OR Apache-2.0)
+     https://github.com/jboss-javassist/javassist
+
+     COMPLIANCE NOTICE FOR JAVASSIST:
+     This project references Javassist as a transitive dependency through
+     org.reflections:reflections. Javassist is used without modification and
+     is dynamically linked at runtime.
+
+     Javassist License Information:
+     - Component: org.javassist:javassist
+     - License: Triple license (MPL-1.1 OR LGPL-2.1+ OR Apache-2.0)
+     - Status: Referenced component (not modified)
+     - Usage: Dynamic linking only
+
+     License References and Full Text:
+     - MPL-1.1: https://www.mozilla.org/en-US/MPL/1.1/
+       Full license text: See LICENSES/MPL-1.1.txt
+     - LGPL-2.1: https://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html
+       Full license text: See LICENSES/LGPL-2.1.txt
+     - Apache-2.0: https://www.apache.org/licenses/LICENSE-2.0
+
+     LGPL-2.1-only Compliance Statement:
+     ✓ Component is referenced (org.javassist:javassist via org.reflections:reflections)
+     ✓ Component is subject to LGPL-2.1-only license obligations
+     ✓ Component is used via dynamic linking without source code modifications
+     ✓ Copyright notices and license files are retained as required
+     ✓ Full LGPL-2.1 license text is included in distribution (LICENSES/LGPL-2.1.txt)
+     ✓ Source code is available at the specified location (https://github.com/jboss-javassist/javassist)
+
+     MPL-1.1 Compliance Statement:
+     ✓ Component is referenced (org.javassist:javassist)
+     ✓ Component is subject to MPL-1.1 license obligations
+     ✓ Component is used without modification
+     ✓ Full MPL-1.1 license text is included in distribution (LICENSES/MPL-1.1.txt)
+
+  3. NanoHttpd
+     Copyright (c) 2012-2013 by Paul S. Hawke, 2001,2005-2013 by Jarle Aase,
+     2013 by Mathias Laux and other contributors.
+     Licensed under BSD-3-Clause
+     https://github.com/NanoHttpd/nanohttpd
+
+  4. Other Apache 2.0 Licensed Components:
+     - FastJSON: Copyright (c) 1999-2017 Alibaba Group Holding Ltd.
+     - Apache Commons Lang3: Copyright 2001-2020 The Apache Software Foundation
+     - Jackson (multiple modules): Copyright (c) 2007- Tatu Saloranta and Contributors
+     - Reflections: Copyright (c) 2004-2023 ronmamo
+     - Retrofit (multiple modules): Copyright 2013 Square, Inc.
+
+     All licensed under Apache License 2.0
+     https://www.apache.org/licenses/LICENSE-2.0
+
+  5. Lombok (Compile-time only)
+     Copyright (C) 2009-2021 The Project Lombok Authors
+     Licensed under MIT License
+     https://github.com/projectlombok/lombok
+
+  ================================================================================
+
+  OPEN SOURCE COMPLIANCE SUMMARY:
+
+  This project is licensed under the MIT License, a permissive open source license.
+
+  Third-Party Component Compliance:
+  - Javassist: Subject to MPL-1.1/LGPL-2.1+/Apache-2.0 triple license
+    * Used without modification via dynamic linking
+    * Compliance obligations fulfilled as documented above
+  - Hutool: Licensed under Mulan PSL v2 (permissive license)
+  - NanoHttpd: Licensed under BSD-3-Clause (permissive license)
+  - Apache 2.0 Components: FastJSON, Commons Lang3, Jackson, Reflections, Retrofit
+  - Lombok: MIT License (compile-time only)
+
+  LICENSE COMPATIBILITY NOTICE:
+  All third-party components listed above are compatible with the MIT License
+  under which this project is distributed. Components with copyleft licenses
+  (MPL, LGPL) are used via dynamic linking without modification, maintaining
+  license compatibility.
+
+  COMPLIANCE OBLIGATIONS:
+  When distributing this software, you must:
+  1. Include this LICENSE file with all copyright notices
+  2. Retain license information for all third-party components
+  3. For LGPL/MPL components: Ensure dynamic linking and provide access to
+     original component source code as documented in the license links above
+
+  MODIFICATION NOTICE:
+  If you modify any LGPL or MPL licensed components, you must clearly document
+  the modifications and comply with the corresponding license terms.
