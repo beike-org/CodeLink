@@ -1,0 +1,149 @@
+<idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude" require-restart="true">
+
+    <extensionPoints>
+        <extensionPoint
+                interface="com.ke.stacktrace.filter.ErrorAIExplainFilterFactory"
+                dynamic="true"
+                name="errorAIExplainFilterFactory"/>
+
+
+        <extensionPoint
+                interface="com.ke.stacktrace.meta.StackTraceInfoProvider"
+                dynamic="true"
+                name="stackTraceInfoProvider"/>
+
+
+        <extensionPoint
+                interface="com.ke.editor.linemarker.action.group.LineMarkerGroupAdapter"
+                dynamic="true"
+                name="lineMarkerGroupAdapter"/>
+
+
+        <extensionPoint
+                interface="com.ke.webview.communication.handler.KeCopilotPanelHandler"
+                dynamic="true"
+                name="keCopilotPanelHandler"/>
+
+        <extensionPoint
+                interface="com.ke.webview.WebviewPanelFactory"
+                dynamic="true"
+                name="webviewPanelFactory"/>
+
+        <extensionPoint
+                interface="com.ke.StartupActivityHandler"
+                dynamic="true"
+                name="startupActivityHandler"/>
+
+
+        <extensionPoint
+                interface="com.ke.editor.EditorPopupActionFactory"
+                dynamic="true"
+                name="editorPopupActionFactory"/>
+
+
+        <extensionPoint
+                interface="com.ke.toolwindow.actions.ToolWindowActionFactory"
+                dynamic="true"
+                name="toolWindowActionFactory"/>
+    </extensionPoints>
+
+    <applicationListeners>
+        <listener topic="com.intellij.ide.ui.LafManagerListener" class="com.ke.ui.ThemeChangedListener"/>
+    </applicationListeners>
+
+    <projectListeners>
+
+        <listener topic="com.intellij.openapi.fileEditor.FileEditorManagerListener"
+                  class="com.ke.editor.EditorFocusFileListener"/>
+
+    </projectListeners>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!--        关闭jcef.remote.enabled，@see com.intellij.ui.jcef.JBCefApp-->
+        <!--        <registryKey key="ide.browser.jcef.out-of-process.enabled" defaultValue="true" description="disable jcef.remote.enabled" />-->
+        <applicationInitializedListener implementation="com.ke.RegistryInitActivity"/>
+        <postStartupActivity implementation="com.ke.PluginStartupActivity"/>
+
+
+        <applicationService serviceInterface="com.ke.service.llm.LLMService"
+                            serviceImplementation="com.ke.agentic.pts.LLMServiceImpl"/>
+
+        <applicationService serviceImplementation="com.ke.setting.configuration.genral.user.UserConfigState"/>
+
+        <applicationConfigurable id="settings.codeLink.general.configuration" displayName="CodeLink"
+                                 instance="com.ke.setting.configuration.genral.GeneralConfigurationConfigurable"
+                                 parentId="other"/>
+
+
+        <projectService serviceImplementation="com.ke.setting.configuration.genral.ConfigurationState"/>
+        <projectService serviceImplementation="com.ke.webview.WebViewManager"/>
+        <projectService serviceImplementation="com.ke.service.notify.NotifyServiceImpl"/>
+        <projectService serviceImplementation="com.ke.search.AskEveryWhereService"/>
+        <toolWindow id="com.ke.CodeLink" anchor="right" icon="/icons/code_link.svg"
+                    factoryClass="com.ke.toolwindow.ProjectToolWindowFactory"/>
+
+
+        <notificationGroup id="CodeLink Notification Group"
+                           displayType="BALLOON"/>
+
+
+        <editorFactoryListener implementation="com.ke.editor.KeEditorListener"/>
+
+        <consoleFilterProvider implementation="com.ke.stacktrace.filter.AIExplainFilterProvider"/>
+
+    </extensions>
+
+    <resource-bundle>messages.CodeLink</resource-bundle>
+
+    <actions>
+
+        <group id="com.ke.CodeLink.EditorActionGroup" class="com.intellij.openapi.actionSystem.DefaultActionGroup"
+               popup="true" icon="/icons/code_link.svg" text="CodeLink">
+
+            <add-to-group group-id="EditorPopupMenu1" anchor="first"/>
+            <separator/>
+        </group>
+
+
+        <action class="com.ke.search.AskEveryWhereAction" id="mySearchAction">
+            <keyboard-shortcut first-keystroke="alt h" keymap="$default"></keyboard-shortcut>
+            <keyboard-shortcut first-keystroke="ctrl alt h" keymap="$default"></keyboard-shortcut>
+        </action>
+
+        <action class="com.ke.toolwindow.actions.WebviewDebugAction" id="myWebviewDebugAction">
+            <keyboard-shortcut first-keystroke="ctrl alt shift h" keymap="$default"></keyboard-shortcut>
+        </action>
+        <action id="KeOnesConsoleEditorAIExplain"
+                class="com.ke.stacktrace.action.RunTimeErrorExplainMenuActionEx"
+                icon="/icons/code_link.svg"
+                text="异常诊断">
+            <add-to-group group-id="ConsoleEditorPopupMenu" anchor="after" relative-to-action="$SearchWeb"/>
+        </action>
+
+        <!-- diff过后接受所有变更的action -->
+        <action class="com.ke.editor.action.AcceptAllChangesAction" id="com.ke.AcceptAllChangesAction">
+            <add-to-group group-id="Diff.EditorPopupMenu" anchor="first"/>
+            <add-to-group group-id="Diff.ViewerToolbar" anchor="first"/>
+        </action>
+
+    </actions>
+
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends optional="true" config-file="maven.xml">org.jetbrains.idea.maven</depends>
+    <depends optional="true" config-file="plugin-java.xml">com.intellij.modules.java</depends>
+    <depends optional="true" config-file="plugin-python.xml">com.intellij.modules.python</depends>
+    <depends optional="true" config-file="plugin-go.xml">org.jetbrains.plugins.go</depends>
+    <depends optional="true" config-file="terminal.xml">org.jetbrains.plugins.terminal</depends>
+    <depends optional="true" config-file="yaml.xml">org.jetbrains.plugins.yaml</depends>
+    <depends optional="true">com.intellij.spring</depends>
+    <depends optional="true" config-file="api.xml">com.intellij.modules.java</depends>
+    <depends optional="true" config-file="git-core.xml">Git4Idea</depends>
+
+
+    <xi:include href="/META-INF/mcp.xml" xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/rules.xml" xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/notepad.xml" xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/agentic.xml" xpointer="xpointer(/idea-plugin/*)"/>
+</idea-plugin>

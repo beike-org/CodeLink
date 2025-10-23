@@ -1,0 +1,35 @@
+<idea-plugin>
+
+
+    <extensions defaultExtensionNs="com.intellij">
+        <codeInsight.lineMarkerProvider
+                id="com.ke.JAVAHelper"
+                language="JAVA"
+                implementationClass="com.ke.editor.linemarker.provider.JavaGeneratorLineMarkerProvider"/>
+
+
+        <codeInsight.lineMarkerProvider
+                id="com.ke.JAVAControllerHelper"
+                language="JAVA"
+                implementationClass="com.ke.editor.linemarker.provider.JavaControllerLineMarkerProvider"/>
+
+
+    </extensions>
+
+
+    <extensions defaultExtensionNs="com.ke.codelink">
+        <errorAIExplainFilterFactory
+                implementation="com.ke.stacktrace.filter.JvmErrorAIExplainFilterFactory"/>
+
+        <stackTraceInfoProvider
+                implementation="com.ke.stacktrace.meta.JavaStackTraceInfoProvider"/>
+
+        <lineMarkerGroupAdapter implementation="com.ke.editor.linemarker.action.group.JavaLineMarkerGroupProvider"/>
+    </extensions>
+
+
+    <actions>
+        <group id="com.ke.java.lineGroup">
+        </group>
+    </actions>
+</idea-plugin>

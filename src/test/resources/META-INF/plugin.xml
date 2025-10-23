@@ -1,0 +1,171 @@
+<idea-plugin require-restart="true">
+    <idea-version since-build="231.*" until-build="251.*"/>
+    <id>com.ke.codelink</id>
+    <name>CodeLink</name>
+    <vendor>贝壳KeOnes</vendor>
+    <version>0.1.0</version>
+    <description><![CDATA[<p><b>高耸的AI塔，悬挂着天空的银色月亮，让人感受到未来的无限可能。</b></p>
+        <p>CodeLink将GPT和Copilot巧妙融入在一个插件的设计之中，让您的编码体验变得流畅和愉快：</p>
+        <ul>
+          <li><b></b> 在您编码时根据代码库和您的开发习惯提供快速、智能、高效的代码编写和自动补全功能。</li>
+          <li><b></b> 可以通过问答随时解决您编码遇到的问题，也可以用于代码注释等帮您管理代码。</li>
+        </ul>
+
+        <p>CodeLink与你的组合必将摩擦出更多火花，也将催生出高级又标准的代码，快点开始体验吧</p>
+
+        <h3>前置条件</h3>
+        <p>为了使用插件，您需要点击最下方状态栏的图标进行登录</p>
+        <h2>功能</h2>
+        <ul>
+          <li><b>对话GPT</b> - 问AI任何问题</li>
+          <li><b>保存对话历史记录</b> - 可查看最近的对话历史记录并恢复以前的会话</li>
+          <li><b>预定义prompt</b> - 包括解释代码，优化代码，生成单测等</li>
+          <li><b>自定义prompt</b> - 为所选代码创建自定义提示词</li>
+          <li><b>同时对话</b> - 在多个选项卡中与AI进行聊天</li>
+
+        </ul>]]></description>
+    <change-notes><![CDATA[<ul>
+      </ul>]]></change-notes>
+    <extensionPoints>
+        <extensionPoint
+                interface="com.ke.stacktrace.filter.ErrorAIExplainFilterFactory"
+                dynamic="true"
+                name="errorAIExplainFilterFactory"/>
+
+
+        <extensionPoint
+                interface="com.ke.stacktrace.meta.StackTraceInfoProvider"
+                dynamic="true"
+                name="stackTraceInfoProvider"/>
+
+
+        <extensionPoint
+                interface="com.ke.editor.linemarker.action.group.LineMarkerGroupAdapter"
+                dynamic="true"
+                name="lineMarkerGroupAdapter"/>
+
+
+        <extensionPoint
+                interface="com.ke.webview.communication.handler.KeCopilotPanelHandler"
+                dynamic="true"
+                name="keCopilotPanelHandler"/>
+
+        <extensionPoint
+                interface="com.ke.webview.WebviewPanelFactory"
+                dynamic="true"
+                name="webviewPanelFactory"/>
+
+        <extensionPoint
+                interface="com.ke.StartupActivityHandler"
+                dynamic="true"
+                name="startupActivityHandler"/>
+
+
+        <extensionPoint
+                interface="com.ke.editor.EditorPopupActionFactory"
+                dynamic="true"
+                name="editorPopupActionFactory"/>
+
+
+        <extensionPoint
+                interface="com.ke.toolwindow.actions.ToolWindowActionFactory"
+                dynamic="true"
+                name="toolWindowActionFactory"/>
+    </extensionPoints>
+
+    <applicationListeners>
+        <listener topic="com.intellij.ide.ui.LafManagerListener" class="com.ke.ui.ThemeChangedListener"/>
+    </applicationListeners>
+
+    <projectListeners>
+
+        <listener topic="com.intellij.openapi.fileEditor.FileEditorManagerListener"
+                  class="com.ke.editor.EditorFocusFileListener"/>
+
+    </projectListeners>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!--        关闭jcef.remote.enabled，@see com.intellij.ui.jcef.JBCefApp-->
+        <!--        <registryKey key="ide.browser.jcef.out-of-process.enabled" defaultValue="true" description="disable jcef.remote.enabled" />-->
+        <applicationInitializedListener implementation="com.ke.RegistryInitActivity"/>
+        <postStartupActivity implementation="com.ke.PluginStartupActivity"/>
+
+
+        <applicationService serviceInterface="com.ke.service.llm.LLMService"
+                            serviceImplementation="com.ke.agentic.pts.LLMServiceImpl"/>
+
+        <applicationService serviceImplementation="com.ke.setting.configuration.genral.user.UserConfigState"/>
+
+        <applicationConfigurable id="settings.codeLink.general.configuration" displayName="CodeLink"
+                                 instance="com.ke.setting.configuration.genral.GeneralConfigurationConfigurable"
+                                 parentId="other"/>
+
+
+        <projectService serviceImplementation="com.ke.setting.configuration.genral.ConfigurationState"/>
+        <projectService serviceImplementation="com.ke.webview.WebViewManager"/>
+        <projectService serviceImplementation="com.ke.service.notify.NotifyServiceImpl"/>
+        <projectService serviceImplementation="com.ke.search.AskEveryWhereService"/>
+        <toolWindow id="com.ke.CodeLink" anchor="right" icon="/icons/code_link.svg"
+                    factoryClass="com.ke.toolwindow.ProjectToolWindowFactory"/>
+
+
+        <notificationGroup id="CodeLink Notification Group"
+                           displayType="BALLOON"/>
+
+
+        <editorFactoryListener implementation="com.ke.editor.KeEditorListener"/>
+
+        <consoleFilterProvider implementation="com.ke.stacktrace.filter.AIExplainFilterProvider"/>
+
+    </extensions>
+
+    <resource-bundle>messages.CodeLink</resource-bundle>
+
+    <actions>
+
+        <group id="com.ke.CodeLink.EditorActionGroup" class="com.intellij.openapi.actionSystem.DefaultActionGroup"
+               popup="true" icon="/icons/code_link.svg" text="CodeLink">
+
+            <add-to-group group-id="EditorPopupMenu1" anchor="first"/>
+            <separator/>
+        </group>
+
+
+        <action class="com.ke.search.AskEveryWhereAction" id="mySearchAction">
+            <keyboard-shortcut first-keystroke="alt h" keymap="$default"></keyboard-shortcut>
+            <keyboard-shortcut first-keystroke="ctrl alt h" keymap="$default"></keyboard-shortcut>
+        </action>
+
+        <action class="com.ke.toolwindow.actions.WebviewDebugAction" id="myWebviewDebugAction">
+            <keyboard-shortcut first-keystroke="ctrl alt shift h" keymap="$default"></keyboard-shortcut>
+        </action>
+        <action id="KeOnesConsoleEditorAIExplain"
+                class="com.ke.stacktrace.action.RunTimeErrorExplainMenuActionEx"
+                icon="/icons/code_link.svg"
+                text="异常诊断">
+            <add-to-group group-id="ConsoleEditorPopupMenu" anchor="after" relative-to-action="$SearchWeb"/>
+        </action>
+
+        <!-- diff过后接受所有变更的action -->
+        <action class="com.ke.editor.action.AcceptAllChangesAction" id="com.ke.AcceptAllChangesAction">
+            <add-to-group group-id="Diff.EditorPopupMenu" anchor="first"/>
+            <add-to-group group-id="Diff.ViewerToolbar" anchor="first"/>
+        </action>
+
+    </actions>
+
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends optional="true" config-file="maven.xml">org.jetbrains.idea.maven</depends>
+    <depends optional="true" config-file="plugin-java.xml">com.intellij.modules.java</depends>
+    <depends optional="true" config-file="plugin-python.xml">com.intellij.modules.python</depends>
+    <depends optional="true" config-file="plugin-go.xml">org.jetbrains.plugins.go</depends>
+    <depends optional="true" config-file="terminal.xml">org.jetbrains.plugins.terminal</depends>
+    <depends optional="true" config-file="yaml.xml">org.jetbrains.plugins.yaml</depends>
+    <depends optional="true">com.intellij.spring</depends>
+    <depends optional="true" config-file="api.xml">com.intellij.modules.java</depends>
+    <depends optional="true" config-file="git-core.xml">Git4Idea</depends>
+
+
+</idea-plugin>

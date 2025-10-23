@@ -1,0 +1,22 @@
+<idea-plugin>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <codeInsight.lineMarkerProvider
+                id="com.ke.PythonHelper"
+                language="Python"
+                implementationClass="com.ke.editor.linemarker.provider.PythonLineMarkerProvider"/>
+
+    </extensions>
+
+
+    <extensions defaultExtensionNs="com.ke.codelink">
+        <errorAIExplainFilterFactory
+                implementation="com.ke.stacktrace.filter.CPythonErrorAIExplainFilterFactory"/>
+
+        <stackTraceInfoProvider
+                implementation="com.ke.stacktrace.meta.PythonStackTraceInfoProvider"/>
+
+        <lineMarkerGroupAdapter implementation="com.ke.editor.linemarker.action.group.PythonLineMarkerGroupProvider"/>
+
+    </extensions>
+</idea-plugin>

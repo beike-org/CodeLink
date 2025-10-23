@@ -1,0 +1,25 @@
+package com.ke.agentic.socket.dto;
+
+import com.alibaba.fastjson.annotation.JSONField;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * @Author: zhangshaoxun001
+ * @Date: 2025/3/12 10:53
+ * @Description
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CommandDTO {
+
+	private String command;
+
+	@JSONField(name = "auto_run")
+	private Boolean autoRun;
+
+	@JSONField(name = "command_id")
+	private String commandId;
+}

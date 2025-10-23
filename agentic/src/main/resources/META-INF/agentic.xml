@@ -1,0 +1,28 @@
+<idea-plugin>
+
+    <projectListeners>
+
+        <listener topic="com.intellij.openapi.fileEditor.FileEditorManagerListener"
+                  class="com.ke.agentic.AgenticEditorFocusFileListener"/>
+
+    </projectListeners>
+
+
+    <extensions defaultExtensionNs="com.ke.codelink">
+        <startupActivityHandler implementation="com.ke.agentic.SideCarProjectInitHandler"/>
+        <keCopilotPanelHandler implementation="com.ke.agentic.webview.handler.AgenticKeCopilotPanelHandler"/>
+        <editorPopupActionFactory implementation="com.ke.agentic.AgenticEditorPopupActionFactory"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+
+        <applicationService serviceImplementation="com.ke.agentic.pts.PTSHandler"/>
+        <applicationService serviceImplementation="com.ke.agentic.SideCarAgentManager"/>
+        <applicationService serviceImplementation="com.ke.agentic.socket.SideCarHttpSocketManager"/>
+
+
+        <projectService serviceImplementation="com.ke.agentic.SideCarUserActionTrace"/>
+        <projectService serviceImplementation="com.ke.agentic.socket.SideCarSocketCacheManager"/>
+    </extensions>
+
+</idea-plugin>

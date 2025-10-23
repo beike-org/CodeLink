@@ -1,0 +1,15 @@
+<idea-plugin>
+
+    <extensions defaultExtensionNs="com.ke.codelink">
+        <keCopilotPanelHandler implementation="com.ke.rules.RulesKeCopilotPanelHandler"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <projectConfigurable id="settings.codeLink.project.rules.configuration" displayName="Rules Setting"
+                             provider="com.ke.rules.ui.RuleConfigurationProvider"
+                             parentId="settings.codeLink.general.configuration"/>
+
+        <projectService serviceImplementation="com.ke.rules.ProjectRuleManager"/>
+
+    </extensions>
+</idea-plugin>

@@ -1,0 +1,13 @@
+<idea-plugin>
+
+    <extensions defaultExtensionNs="com.ke.codelink">
+        <keCopilotPanelHandler implementation="com.ke.notepad.webview.NotepadKeCopilotPanelHandler"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="NotePad" anchor="left" icon="/icons/notepad.svg"
+                    factoryClass="com.ke.notepad.ui.NotepadToolWindowFactory"
+                    conditionClass="com.ke.notepad.ui.NotepadToolWindowCondition"/>
+
+    </extensions>
+</idea-plugin>

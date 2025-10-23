@@ -1,0 +1,29 @@
+<idea-plugin>
+
+    <extensions defaultExtensionNs="com.ke.codelink">
+        <keCopilotPanelHandler implementation="com.ke.mcp.webview.McpHandler"/>
+        <startupActivityHandler implementation="com.ke.mcp.webview.handler.McpProjectInitHandler"/>
+    </extensions>
+
+
+    <projectListeners>
+        <listener
+                topic="com.intellij.openapi.project.ProjectManagerListener"
+                class="com.ke.mcp.listener.McpProjectCloseListener"/>
+    </projectListeners>
+
+
+    <extensions defaultExtensionNs="com.intellij">
+        <postStartupActivity implementation="com.ke.mcp.activity.McpConfigStartUpActivity"
+                             id="com.ke.mcp.activity.McpConfigStartUpActivity"/>
+
+        <projectConfigurable id="settings.codeLink.project.configuration" displayName="MCP Setting"
+                             provider="com.ke.mcp.ui.McpConfigurationProvider"
+                             parentId="settings.codeLink.general.configuration"/>
+
+        <applicationService serviceImplementation="com.ke.mcp.communication.sidecar.McpPTSHandler"/>
+        <projectService serviceImplementation="com.ke.mcp.manager.McpConfigFileManager"/>
+
+
+    </extensions>
+</idea-plugin>

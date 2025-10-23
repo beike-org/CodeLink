@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script>
+        function handleClick() {
+            window.JavaPanelBridge.sendMessage(JSON.stringify({
+                "command": "refresh"
+            }));
+        }
+    </script>
+
+    <title>错误界面</title>
+  <style>
+    :root {
+      --bg: [bg];
+      --font-color: [font-color];
+      --font-size: [font-size]px;
+      --separator-color: [separator-color];
+      --disabled-color: [disabled-color];
+      --scrollbar-color: [scrollbar-color];
+      --scrollbar-radius: [scrollbar-radius]px;
+      --panel-background-color: [panel-background-color];
+      --button-background-color: [button-background-color];
+      --button-disabled-background-color: [button-disabled-background-color];
+      --ones-icon: [ones-icon];
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg);
+      color: var(--font-color);
+      font-family: 'Inter', sans-serif;
+      font-size: var(--font-size);
+    }
+
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+        height: 80vh;
+    }
+    
+    .container {
+      text-align: center;
+    }
+    
+    .icon {
+      background-image: var(--ones-icon);
+      background-size: cover;     /* 如果需要，使用cover或contain来调整图片大小 */
+      width: 200px;               /* 设置你想要的宽度 */
+      height: 200px;
+    }
+
+    .button {
+      width: 80px;
+      height: 30px;
+      background-color: #66bde3;
+      color: white;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: var(--font-size);
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+<!--    <div class="icon"></div>-->
+<!--    <img class="icon" src="var(&#45;&#45;&#45;&#45;ones-icon)" alt="图标">-->
+    <p>网络异常，加载页面失败</p>
+    <button class="button" onclick="handleClick()" id="test22">刷新</button>
+  </div>
+</body>
+</html>

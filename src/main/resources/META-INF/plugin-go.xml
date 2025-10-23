@@ -1,0 +1,14 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+
+        <codeInsight.lineMarkerProvider
+                id="com.ke.GoHelper"
+                language="go"
+                implementationClass="com.ke.editor.linemarker.provider.GoLineMarkerProvider"/>
+
+    </extensions>
+
+    <extensions defaultExtensionNs="com.ke.codelink">
+        <lineMarkerGroupAdapter implementation="com.ke.editor.linemarker.action.group.GoLineMarkerGroupProvider"/>
+    </extensions>
+</idea-plugin>
