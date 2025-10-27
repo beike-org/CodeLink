@@ -2,15 +2,15 @@
 CodeLink是一个自托管、开源的AI 编码助手，为用户提供媲美Cursor Agent的开发体验，提供 GitHub Copilot插件的本地化替代方案。
 
 ## 核心特性
-1、ChatBot模式：智能编程问答，解决各类编程问题，包括：代码重构与优化、代码分析与诊断、Bugfix等
-2、本地Agent模式：Agent自主规划，端到端解决问题，MCPTools\Rules\PastChats\Files\Notepad等各种上下文工具一站配齐。
-3、远程Agent模式（陆续开放）：将开发任务委派至云端沙箱中的编程Agent异步执行，支持多任务并行，随时随地观察执行进展，一键生成PR。
+1. ChatBot模式：智能编程问答，解决各类编程问题，包括：代码重构与优化、代码分析与诊断、Bugfix等 
+2. 本地Agent模式：Agent自主规划，端到端解决问题，MCPTools\Rules\PastChats\Files\Notepad等各种上下文工具一站配齐。 
+3. 远程Agent模式（陆续开放）：将开发任务委派至云端沙箱中的编程Agent异步执行，支持多任务并行，随时随地观察执行进展，一键生成PR。
 
 ## 技术特性
-1、基于IntelliJ Platform SDK开发
-2、模块化设计，各功能模块职责明确
-3、多进程设计，保证IDE稳定性
-4、部分能力以Webview实现，灵活升级，发版简单。关联的webview项目，详见https://github.com/beike-org/codelink-webview 
+1. 基于IntelliJ Platform SDK开发 
+2. 模块化设计，各功能模块职责明确 
+3. 多进程设计，保证IDE稳定性 
+4. 部分能力以Webview实现，灵活升级，发版简单。关联的webview项目，详见https://github.com/beike-org/codelink-webview 
 
 ## 项目代码结构
 ### Common模块
